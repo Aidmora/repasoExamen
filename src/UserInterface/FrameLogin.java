@@ -14,6 +14,8 @@ import LecturaArchivos.LecturaArchivo;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.HeadlessException;
@@ -21,101 +23,111 @@ import java.awt.Insets;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 
 import BusinessLogic.Entities.MNUsuario;
 import BusinessLogic.Facade.MNUsuarioBL;
 
-public class login extends JFrame implements ActionListener{
-    private JLabel lblUsuario, lblClave;
+public class FrameLogin extends JFrame implements ActionListener{
+    private JLabel mnLblUsuario, mnLblClave;
     private JTextField mnTxtUsuario;
     private JPasswordField mnPswClave;
-    private GridBagConstraints constraints;
-    private JButton boton1;
-    private JPanel mnPanel;
-    private int intentos;
-    static login label = new login();
-    String textoStr,texto2Str;
+    private GridBagConstraints mnConstraints;
+    private JButton mnBtnIngresar;
+    private JPanel mnPanel, mnPanelBoton;
+    private int mnIntentos;
+    String mnText1,mnText2;
     
-    public login (){
+    public FrameLogin (){
         mnSetCustomization();
         mnInitComponents();
         mnAddComponents();
 
         
-        boton1.addActionListener(this);
+        mnBtnIngresar.addActionListener(this);
     }
 
     public void mnInitComponents() {
-        lblUsuario      = new JLabel("Usuario");
-        lblClave        = new JLabel("Contraseña");
+        mnLblUsuario    = new JLabel("Usuario");
+        mnLblClave      = new JLabel("Contraseña");
         mnTxtUsuario    = new JTextField(15);
         mnPswClave      = new JPasswordField(15);
-        boton1          = new JButton("Ingresar");
+        mnBtnIngresar   = new JButton("Ingresar");
         mnPanel         = new JPanel();
-        intentos = 0;
+        mnPanelBoton    = new JPanel();
+        mnIntentos = 0;
 
-        boton1.setBackground(Color.BLACK); 
+        mnBtnIngresar.setBackground(Color.GREEN); 
+        mnBtnIngresar.setPreferredSize(new Dimension(150, 50));
         mnPanel.setLayout(new GridBagLayout());
+        mnPanelBoton.setLayout(new FlowLayout());
 
-        constraints = new GridBagConstraints();
-        constraints.insets = new Insets(10, 10, 10, 10);
+        mnConstraints = new GridBagConstraints();
+        mnConstraints.insets = new Insets(10, 10, 10, 10);
 
         setSize(800, 600);
         setLocationRelativeTo(null);
     }
 
     public void mnSetCustomization() {
-        setTitle("Bievenido...");
+        setTitle("Bienvenido...");
         setLayout(new BorderLayout()); 
 
         
     }
 
     public void mnAddComponents() {
-        constraints.gridx = 0; 
-        constraints.gridy = 0;
-        mnPanel.add(lblUsuario, constraints);
+        mnConstraints.gridx = 0; 
+        mnConstraints.gridy = 0;
+        mnPanel.add(mnLblUsuario, mnConstraints);
         
-        constraints.gridy = 1;
-        mnPanel.add(mnTxtUsuario, constraints);
+        mnConstraints.gridy = 1;
+        mnPanel.add(mnTxtUsuario, mnConstraints);
         
-        constraints.gridy = 2;
-        mnPanel.add(lblClave, constraints);
+        mnConstraints.gridy = 2;
+        mnPanel.add(mnLblClave, mnConstraints);
 
-        constraints.gridy = 3;
-        mnPanel.add(mnPswClave, constraints);
+        mnConstraints.gridy = 3;
+        mnPanel.add(mnPswClave, mnConstraints);
         
         add(mnPanel, BorderLayout.CENTER);
-        add(boton1, BorderLayout.SOUTH);
+        add(new JPanel().add(mnBtnIngresar), BorderLayout.SOUTH);
 
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == boton1) {
+        if (e.getSource() == mnBtnIngresar) {
             String mnUsuarioIng    = mnTxtUsuario.getText();
             String mnContrasenaIng = new String(mnPswClave.getPassword());
 
             try {
                 if (validarCredenciales(mnUsuarioIng, mnContrasenaIng)) {
                     JOptionPane.showMessageDialog(null, "¡Sesión Iniciada!");
-                    label.setVisible(false); 
+                    setVisible(false);
+                    new FrameTabla().setVisible(true);;
                     
                 } else {
-                    intentos++;
+                    mnIntentos++;
                     mnTxtUsuario.setText("");
                     mnPswClave.setText("");
                     JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrectos!");
 
-                    if (intentos >= 3) {
+                    if (mnIntentos >= 3) {
                         JOptionPane.showMessageDialog(null, "Lo sentimos, intentos agotados!");
                         System.exit(0); 
                     }
                 }
             } catch (HeadlessException | AppExceptionAriel e1) {
+                e1.printStackTrace();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            } catch (SQLException e1) {
+                // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
         }

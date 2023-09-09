@@ -1,6 +1,5 @@
 
-import LecturaArchivos.LecturaArchivo;
-import LecturaArchivos.MNCargarArchivos;
+
 import UserInterface.*;
 public class App {
     public static  String directorioHorario= ".\\MNCoordenadas";
@@ -9,8 +8,7 @@ public class App {
         // lc.LeerArchivos(directorioHorario);
         LecturaArchivo lc= new LecturaArchivo();
         lc.LeerArchivos(directorioHorario);
-        //new login().setVisible(true);
-        MNCargarArchivos mnCargarArchivos= new MNCargarArchivos(lc);
-        mnCargarArchivos.mnCargar();
+        new login().setVisible(true);
+        
     }
 }
