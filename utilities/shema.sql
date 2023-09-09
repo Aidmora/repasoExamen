@@ -12,8 +12,8 @@ INSERT INTO MN_USUARIO(NombreUsuario, ContrasenaUsuario) VALUES("fernando.nagua@
 SELECT * FROM MN_USUARIO;
 
 CREATE TABLE MN_ARSENALTIPO(
-    IdArenalTipo    INTEGER     NOT NULL    PRIMARY KEY  AUTOINCREMENT,
-    NombreArsenal   TEXT        NOT NULL
+    IdArenalTipo        INTEGER     NOT NULL    PRIMARY KEY  AUTOINCREMENT,
+    NombreArsenalTipo   TEXT        NOT NULL
 );
 
 
@@ -32,8 +32,8 @@ SELECT * FROM MN_ARSENAL;
 
 CREATE TABLE MN_HORARIO(
     IdHorario       INTEGER     NOT NULL    PRIMARY KEY  AUTOINCREMENT,
-    NombreDia       TEXT        NOT NULL,
-    Hora            TEXT        NOT NULL                               
+    NombreDia       TEXT,
+    Hora            TEXT                              
 );
 SELECT * FROM MN_HORARIO;
 SELECT * FROM MN_ARSENALTIPO;

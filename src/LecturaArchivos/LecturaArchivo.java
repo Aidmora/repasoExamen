@@ -18,7 +18,15 @@ public class LecturaArchivo {
     public List<String> mnHorario=new ArrayList<>();
     public List<String> mnHorarioDia=new ArrayList<>();
     public List<String> mnArsenalNombre= new ArrayList<>();
+    public HashSet<String> mnArsenalTipoNombre = new HashSet<>();
     public String mnNombreArsenal="";
+    /**
+     * 
+     * @param directorioHorario
+     * @throws IOException
+     * @throws AppExceptionAriel
+     * @throws SQLException
+     */
     public void LeerArchivos(String directorioHorario) throws IOException, AppExceptionAriel, SQLException{
         File f = new File(directorioHorario);
         if(f.isDirectory()){
@@ -62,12 +70,19 @@ public class LecturaArchivo {
             }
         }
         mnObtenerNombreArsenal(mnArsenal);
+        mnObtenerTipoAsenal(mnArsenal);
+
         System.out.println("[+] Leyendo:" +"\n"
                             + " -Arsenal Tipo....."+"\n"
                             + " -Coordenadas....."+"\n"
                             + " -Arsenal....."+"\n"
                             + " -Horarios.....");
     }
+    /**
+     * 
+     * @param mnArsenal
+     * @return
+     */
     public List<String> mnObtenerNombreArsenal(List <String> mnArsenal){
         for (String mnCodigo : mnArsenal) {
             if(mnCodigo.equals("a"))mnNombreArsenal="Avion";
@@ -79,5 +94,33 @@ public class LecturaArchivo {
         }
         return mnArsenalNombre;
     }
+    /**
+     * 
+     * @param mnArsenal
+     */
+    private HashSet <String> mnObtenerTipoAsenal(List<String> mnArsenal) {
+        for (String mnTipoArsenal : mnArsenal) {
+            for (int i = 0; i < mnTipoArsenal.length(); i++) {
+                if (mnTipoArsenal.charAt(i) == 'a') {
+                    mnArsenalTipoNombre.add("Aéreo");
+                }
+                if (mnTipoArsenal.charAt(i) == 'b') {
+                    mnArsenalTipoNombre.add("Marítimo");
+                }
+                if (mnTipoArsenal.charAt(i) == 'c') {
+                    mnArsenalTipoNombre.add("Terrestre");
+                }
+                if (mnTipoArsenal.charAt(i) == 'd') {
+                    mnArsenalTipoNombre.add("Aéreo");
+                }
+                if (mnTipoArsenal.charAt(i) == 't') {
+                    mnArsenalTipoNombre.add("Terrestre");
+                }
+            }
+
+        }
+        return mnArsenalTipoNombre;
+    }
+
 }
  

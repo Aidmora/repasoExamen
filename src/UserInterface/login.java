@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 
 import DataAccess.MNUsuarioDAC;
 import FrameWork.AppExceptionAriel;
+import LecturaArchivos.LecturaArchivo;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -91,7 +92,7 @@ public class login extends JFrame implements ActionListener{
 
     }
 
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == boton1) {

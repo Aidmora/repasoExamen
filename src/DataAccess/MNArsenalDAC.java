@@ -1,24 +1,21 @@
 package DataAccess;
 
-import java.awt.List;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import FrameWork.AppExceptionAriel;
 
-public class MNCoordenadasDAC extends SQLiteDataHelper {
-    public MNCoordenadasDAC() throws AppExceptionAriel {
+public class MNArsenalDAC extends SQLiteDataHelper {
+    public MNArsenalDAC() throws AppExceptionAriel {
         super();
     }
 
     public void mnInsertarDatos(String mnDato){
-        String insertSQL= "INSERT INTO MN_COORDENADAS" + " (Coordenada ) " +
+        String insertSQL= "INSERT INTO MN_ARSENAL" + " (NombreArsenal) " +
            "VALUES ( ?)";
         try  {
             mnPreparedSt = mnConn.prepareStatement(insertSQL);
-            String [] mnCoor= mnDato.split("-");
-            String mnCoorNum= mnCoor[0].trim();
-            mnPreparedSt.setString(1,mnCoorNum );
+            mnPreparedSt.setString(1,mnDato );
             mnPreparedSt.executeUpdate();       
             
         } catch (SQLException e) {

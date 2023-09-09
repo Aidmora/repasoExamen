@@ -108,21 +108,8 @@ public abstract class SQLiteDataHelper {
     //     String insertSQL= "INSERT INTO " + nombreTabla + " (IdAutor,NombreAutor,Nacionalidad,FechaNacimiento,Estado) " +
     //     "VALUES ( ?, ?, ?, ?, ?)";
     //      try (PreparedStatement pstmt = connection.prepareStatement(insertSQL)) {
-    //         for (String line : lines) {
-    //             String[] values = line.split(";");
-    //             if(values[0].toLowerCase().trim().contains("id")){
-    //                 continue;
-    //             }
-    //             if (values.length == 5) { 
     //                 pstmt.setInt(1,Integer.parseInt(values[0].trim()) );
-    //                 pstmt.setString(2,values[1].trim() );
-    //                 pstmt.setString(3,values[2].trim() );
-    //                 pstmt.setString(4,values[3].trim() );
-    //                 pstmt.setString(5,values[4].trim() );
     //                 pstmt.executeUpdate(); 
-    //             } else {
-    //                 System.err.println("La línea no tiene suficientes valores: " + line);
-    //             }
     //         }
     //     } catch (SQLException e) {
     //         e.printStackTrace();
