@@ -24,7 +24,13 @@ public class MNHorarioBl {
             mnHorarioDAC.mnInsertarDatos(mnHorarioDia.get(i), mnHorario.get(i));
         }
     }
-        public List<MNHorario> mnGetAll() throws AppException {
+    /**
+     * mnGetAll: Este metodo se encarga de insertar la informacion obtenida por el DAC,  en una lista  
+     * correspondiente a la clase Horario.
+     * @return List<MNHorario>: Representa a una lista de horarios.
+     * @throws AppException
+     */
+    public List<MNHorario> mnGetAll() throws AppException {
         ResultSet mnRs = mnHorarioDAC.mnGetAll();
         List<MNHorario> mnListaHorario = new ArrayList<>();
         MNHorario mnHorario;

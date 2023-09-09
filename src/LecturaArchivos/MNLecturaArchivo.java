@@ -21,7 +21,7 @@ public class MNLecturaArchivo {
     public HashSet<String> mnArsenalTipoNombre = new HashSet<>();
     public String mnNombreArsenal="";
     /**
-     * 
+     * LeerArchivos: Este metodo se encarga de leer el archivo .csv 
      * @param directorioHorario
      * @throws IOException
      * @throws AppException
@@ -79,8 +79,8 @@ public class MNLecturaArchivo {
                             + " -Horarios.....");
     }
     /**
-     * 
-     * @param mnArsenal
+     * mnObtenerNombreArsenal: Este metodo se encarga de obtener el nombre del código correspondiente al arsenal.
+     * @param mnArsenal: Representa a la lista que tiene los códigos del arsenal.
      * @return
      */
     public List<String> mnObtenerNombreArsenal(List <String> mnArsenal){
@@ -95,8 +95,8 @@ public class MNLecturaArchivo {
         return mnArsenalNombre;
     }
     /**
-     * 
-     * @param mnArsenal
+     * mnObtenerTipoAsenal: Este método se encarga de obtener  el tipo de arsenal a partir del "código"
+     * @param mnArsenal: Representa a la lista que tiene los códigos del arsenal.
      */
     private HashSet <String> mnObtenerTipoAsenal(List<String> mnArsenal) {
         for (String mnTipoArsenal : mnArsenal) {

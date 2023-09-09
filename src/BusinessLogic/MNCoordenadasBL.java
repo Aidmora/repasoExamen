@@ -24,6 +24,12 @@ public class MNCoordenadasBL {
             mnCoordenadasDAC.mnInsertarDatos(mnCoordenadasStr);
         }
     }
+    /**
+     * mnGetAll: Este metodo se encarga de insertar la informacion obtenida por el DAC,  en una lista 
+     * correspondiente a Coordenadas. 
+     * @return List<MNCoordenadas>: Representa a una lista de Coordenadas.
+     * @throws AppException
+     */
     public List<MNCoordenadas> mnGetAll() throws AppException {
         ResultSet mnRs = mnCoordenadasDAC.mnGetAll();
         List<MNCoordenadas> mnListaCoordenadas = new ArrayList<>();

@@ -1,7 +1,6 @@
 package FrameWork;
 
 public class AppException extends Exception  {
-
     public AppException(Throwable cause, Object className, String message) {
         super(className +":"+message, cause);
         setDebuggingLog();

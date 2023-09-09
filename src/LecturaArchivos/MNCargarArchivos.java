@@ -13,7 +13,10 @@ public class MNCargarArchivos {
         this.lecturaArchivo = lecturaArchivo;
 
     }
-
+    /**
+     * mnCargar: Este metodo se encarga de cargar las listas con la informacion en las entidades "BL"
+     * @throws AppException
+     */
     public void mnCargar() throws AppException {
         new MNArsenalBL().mnSetAllData(lecturaArchivo.mnArsenalNombre);
         new MNArsenalTipoBL().mnSetAllData(lecturaArchivo.mnArsenalTipoNombre);

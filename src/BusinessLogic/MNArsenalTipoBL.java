@@ -25,6 +25,12 @@ public class MNArsenalTipoBL {
             mnArsenalTipoDAC.mnInsertarDatos(mnArsenalTipoStr);
         }
     }
+    /**
+     * mnGetAll:Este metodo se encarga de insertar la informacion obtenida por el DAC,  en una lista 
+     * correspondiente a la entidad ArsenalTipo.
+     * @return List<MNArsenalTipo>: Representa a una lista de Arsenal Tipo.
+     * @throws AppException
+     */
     public List<MNArsenalTipo> mnGetAll() throws AppException {
         ResultSet mnRs = mnArsenalTipoDAC.mnGetAll();
         List<MNArsenalTipo> mnListaArsenalTipo = new ArrayList<>();

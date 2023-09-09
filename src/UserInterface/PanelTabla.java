@@ -49,7 +49,7 @@ public class PanelTabla extends JPanel {
         mnLecturaArchivo = new MNLecturaArchivo();
         mnLecturaArchivo.LeerArchivos(RUTA);
         mnCargarArchivos = new MNCargarArchivos(mnLecturaArchivo);
-        // mnCargarArchivos.mnCargar();
+        mnCargarArchivos.mnCargar();
 
     }
 

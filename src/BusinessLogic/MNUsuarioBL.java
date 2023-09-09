@@ -15,7 +15,12 @@ public class MNUsuarioBL {
     public MNUsuarioBL() throws AppException {
         mnUsuarioDAC = new MNUsuarioDAC();
     }
-    
+    /**
+     * mnGetAll: Este metodo se encarga de insertar la informacion obtenida por el DAC,  en una lista 
+     * correspondiente a Usuario. 
+     * @return List<MNUsuario>: Representa a una lista de Usuarios.
+     * @throws AppException
+     */
     public List<MNUsuario> mnGetAll() throws AppException {
         ResultSet mnRs = mnUsuarioDAC.mnGetAll();
         List<MNUsuario> mnListaUsuarios = new ArrayList<>();
