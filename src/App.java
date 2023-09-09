@@ -9,8 +9,5 @@ public class App {
         String valorEncriptado=lg.encriptar("12345");
         String valorEncriptado2=lg.encriptar("1724681521");
         String valorEncriptado3=lg.encriptar("1724721301");
-        System.out.println(valorEncriptado);
-        System.out.println(valorEncriptado2);
-        System.out.println(valorEncriptado3);
     }
 }

@@ -7,9 +7,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import DataAccess.MNUsuarioDAC;
 import FrameWork.AppExceptionAriel;
 
 import java.awt.Color;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.security.MessageDigest;
@@ -19,39 +21,58 @@ public class login extends JFrame implements ActionListener{
     private JTextField texto;
     private JPasswordField texto2;
     private JButton boton1;
-    private static final String usuario="profe";
-    private static final String contrasena="1234";
     private static int intentos=0;
-    static login label= new login();
+    static login label = new login();
     String textoStr,texto2Str;
+    
     public login (){
-        setTitle("Bievenido...");
-        setLayout(null); 
-        etiquieta= new JLabel("<html><font color='#e2c15c'>Correo electrónico</font></html>");
-        etiquieta2= new JLabel("<html><font color='#e2c15c'>Contraseña</font></html>");
-        etiquieta.setBounds(30, 160, 200, 35);
-        etiquieta2.setBounds(30, 220, 200, 35);
-        add(etiquieta);
-        add(etiquieta2);
+        mnSetCustomization();
+        mnInitComponents();
+        mnAddComponents();
 
-        texto= new JTextField();
-        texto2= new JPasswordField();
-        texto.setBounds(30,190,250,30);
-        texto2.setBounds(30,250,250,30);
-        add(texto);
-        add(texto2);
-
-        boton1= new JButton("<html><font color='#e2c15c'>Iniciar sesión</font></html>");
-        boton1.setBounds(70, 520, 155, 30);
-        boton1.setBackground(Color.BLACK); 
-        add(boton1);
+        
         boton1.addActionListener(this);
     }
+
+    public void mnInitComponents() {
+        etiquieta = new JLabel("<html><font color='#e2c15c'>Correo electrónico</font></html>");
+        etiquieta2 = new JLabel("<html><font color='#e2c15c'>Contraseña</font></html>");
+        texto= new JTextField();
+        texto2= new JPasswordField();
+        boton1= new JButton("<html><font color='#e2c15c'>Iniciar sesión</font></html>");
+
+    }
+
+    public void mnSetCustomization() {
+        setTitle("Bievenido...");
+        setLayout(null); 
+        etiquieta.setBounds(30, 160, 200, 35);
+        etiquieta2.setBounds(30, 220, 200, 35);
+        
+        texto.setBounds(30,190,250,30);
+        texto2.setBounds(30,250,250,30);
+
+        boton1.setBounds(70, 520, 155, 30);
+        boton1.setBackground(Color.BLACK); 
+    }
+
+    public void mnAddComponents() {
+        add(etiquieta);
+        add(etiquieta2);
+        add(texto);
+        add(texto2);
+        add(boton1);
+
+    }
+
+    
+
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == boton1) {
-            String usuarioIngresado = texto.getText();
-            String contrasenaIngresada = new String(texto2.getPassword());
-            if (validarCredenciales(usuarioIngresado, contrasenaIngresada)) {
+            String mnUsuarioIng    = texto.getText();
+            String mnContrasenaIng = new String(texto2.getPassword());
+
+            if (validarCredenciales(mnUsuarioIng, mnContrasenaIng)) {
                 JOptionPane.showMessageDialog(null, "¡Sesión Iniciada!");
                 label.setVisible(false); 
                 try {
@@ -75,8 +96,15 @@ public class login extends JFrame implements ActionListener{
         }
     }
 
-    private boolean validarCredenciales(String usuarioIngresado, String contrasenaIngresada) {
-        return usuarioIngresado.equals(usuario) && contrasenaIngresada.equals(contrasena);
+    private boolean validarCredenciales(String mnUsuarioIng, String mnClaveIng) {
+        List<MNUsuario> mnListaUsuarios = new MNUsuarioDAC().mnGetAll();
+
+        for (UserInterface.mnUsuario mnUsuario : mnListaUsuarios) {
+            if (mnUsuario.getNombreUsuario.equals(mnUsuarioIng))
+                if (mnUsuario.getContraseniaUsuario.equals(mnEncriptar(mnClaveIng)))
+                    return true;
+        }
+        return false;
     }
     
     public void mostrarPantalla(){
@@ -86,7 +114,7 @@ public class login extends JFrame implements ActionListener{
         label.setVisible(true);
         label.setLocationRelativeTo(null);
     }
-    public String encriptar(String mnContrasena) {
+    public String mnEncriptar(String mnContrasena) {
 
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
