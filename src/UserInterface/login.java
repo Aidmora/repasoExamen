@@ -4,24 +4,36 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import DataAccess.MNUsuarioDAC;
 import FrameWork.AppExceptionAriel;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.List;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.HeadlessException;
+import java.awt.Insets;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import BusinessLogic.Entities.MNUsuario;
+import BusinessLogic.Facade.MNUsuarioBL;
+
 public class login extends JFrame implements ActionListener{
-    private JLabel etiquieta, etiquieta2;
-    private JTextField texto;
-    private JPasswordField texto2;
+    private JLabel lblUsuario, lblClave;
+    private JTextField mnTxtUsuario;
+    private JPasswordField mnPswClave;
+    private GridBagConstraints constraints;
     private JButton boton1;
-    private static int intentos=0;
+    private JPanel mnPanel;
+    private int intentos;
     static login label = new login();
     String textoStr,texto2Str;
     
@@ -35,87 +47,99 @@ public class login extends JFrame implements ActionListener{
     }
 
     public void mnInitComponents() {
-        etiquieta = new JLabel("<html><font color='#e2c15c'>Correo electrónico</font></html>");
-        etiquieta2 = new JLabel("<html><font color='#e2c15c'>Contraseña</font></html>");
-        texto= new JTextField();
-        texto2= new JPasswordField();
-        boton1= new JButton("<html><font color='#e2c15c'>Iniciar sesión</font></html>");
+        lblUsuario      = new JLabel("Usuario");
+        lblClave        = new JLabel("Contraseña");
+        mnTxtUsuario    = new JTextField(15);
+        mnPswClave      = new JPasswordField(15);
+        boton1          = new JButton("Ingresar");
+        mnPanel         = new JPanel();
+        intentos = 0;
 
+        boton1.setBackground(Color.BLACK); 
+        mnPanel.setLayout(new GridBagLayout());
+
+        constraints = new GridBagConstraints();
+        constraints.insets = new Insets(10, 10, 10, 10);
+
+        setSize(800, 600);
+        setLocationRelativeTo(null);
     }
 
     public void mnSetCustomization() {
         setTitle("Bievenido...");
-        setLayout(null); 
-        etiquieta.setBounds(30, 160, 200, 35);
-        etiquieta2.setBounds(30, 220, 200, 35);
-        
-        texto.setBounds(30,190,250,30);
-        texto2.setBounds(30,250,250,30);
+        setLayout(new BorderLayout()); 
 
-        boton1.setBounds(70, 520, 155, 30);
-        boton1.setBackground(Color.BLACK); 
+        
     }
 
     public void mnAddComponents() {
-        add(etiquieta);
-        add(etiquieta2);
-        add(texto);
-        add(texto2);
-        add(boton1);
+        constraints.gridx = 0; 
+        constraints.gridy = 0;
+        mnPanel.add(lblUsuario, constraints);
+        
+        constraints.gridy = 1;
+        mnPanel.add(mnTxtUsuario, constraints);
+        
+        constraints.gridy = 2;
+        mnPanel.add(lblClave, constraints);
+
+        constraints.gridy = 3;
+        mnPanel.add(mnPswClave, constraints);
+        
+        add(mnPanel, BorderLayout.CENTER);
+        add(boton1, BorderLayout.SOUTH);
 
     }
 
     
-
+    @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == boton1) {
-            String mnUsuarioIng    = texto.getText();
-            String mnContrasenaIng = new String(texto2.getPassword());
+            String mnUsuarioIng    = mnTxtUsuario.getText();
+            String mnContrasenaIng = new String(mnPswClave.getPassword());
 
-            if (validarCredenciales(mnUsuarioIng, mnContrasenaIng)) {
-                JOptionPane.showMessageDialog(null, "¡Sesión Iniciada!");
-                label.setVisible(false); 
-                try {
-                   BibliotecaMenu  menu = new BibliotecaMenu();
-                   menu.mostrarMenu();
-                } catch (AppExceptionAriel e1) {
-                    e1.printStackTrace();
-                }
-                
-            } else {
-                intentos++;
-                texto.setText("");
-                texto2.setText("");
-                JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrectos!");
+            try {
+                if (validarCredenciales(mnUsuarioIng, mnContrasenaIng)) {
+                    JOptionPane.showMessageDialog(null, "¡Sesión Iniciada!");
+                    label.setVisible(false); 
+                    
+                } else {
+                    intentos++;
+                    mnTxtUsuario.setText("");
+                    mnPswClave.setText("");
+                    JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrectos!");
 
-                if (intentos >= 3) {
-                    JOptionPane.showMessageDialog(null, "Lo sentimos, intentos agotados!");
-                    System.exit(0); 
+                    if (intentos >= 3) {
+                        JOptionPane.showMessageDialog(null, "Lo sentimos, intentos agotados!");
+                        System.exit(0); 
+                    }
                 }
+            } catch (HeadlessException | AppExceptionAriel e1) {
+                e1.printStackTrace();
             }
         }
     }
 
-    private boolean validarCredenciales(String mnUsuarioIng, String mnClaveIng) {
-        List<MNUsuario> mnListaUsuarios = new MNUsuarioDAC().mnGetAll();
+    private boolean validarCredenciales(String mnUsuarioIng, String mnClaveIng) throws AppExceptionAriel {
+        List<MNUsuario> mnListaUsuarios = new MNUsuarioBL().mnGetAll();
 
-        for (UserInterface.mnUsuario mnUsuario : mnListaUsuarios) {
-            if (mnUsuario.getNombreUsuario.equals(mnUsuarioIng))
-                if (mnUsuario.getContraseniaUsuario.equals(mnEncriptar(mnClaveIng)))
+        for (MNUsuario mnUsuario : mnListaUsuarios) {
+            if (mnUsuario.getNombreUsuario().equals(mnUsuarioIng))
+                if (mnUsuario.getClaveUsuario().equals(mnEncriptar(mnClaveIng)))
                     return true;
         }
         return false;
     }
     
-    public void mostrarPantalla(){
-        BibliotecaSplash bibliotecaSplash= new BibliotecaSplash();
-        bibliotecaSplash.mostrarPantallazo();
-        label.setBounds(0, 0, 310, 730);
-        label.setVisible(true);
-        label.setLocationRelativeTo(null);
-    }
-    public String mnEncriptar(String mnContrasena) {
+    // public void mostrarPantalla(){
+    //     BibliotecaSplash bibliotecaSplash= new BibliotecaSplash();
+    //     bibliotecaSplash.mostrarPantallazo();
+    //     label.setBounds(0, 0, 310, 730);
+    //     label.setVisible(true);
+    //     label.setLocationRelativeTo(null);
+    // }
 
+    public String mnEncriptar(String mnContrasena) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] inputBytes = mnContrasena.getBytes();
