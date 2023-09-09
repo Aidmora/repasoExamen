@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import FrameWork.AppExceptionAriel;
+import FrameWork.AppException;
 
 import java.awt.*;
 import java.io.IOException;
@@ -17,7 +17,7 @@ public class FrameTabla extends JFrame {
     private JPanel mnPanelTitulo;
     private JLabel mnLblTitulo;
 
-    public FrameTabla() throws IOException, AppExceptionAriel, SQLException {
+    public FrameTabla() throws IOException, AppException, SQLException {
         mnSetCustomization();
         mnInitComponents();
         addComponents();
@@ -40,7 +40,7 @@ public class FrameTabla extends JFrame {
         mnPanelTitulo.setLayout(new FlowLayout());
     }
 
-    private void addComponents() throws IOException, AppExceptionAriel, SQLException {
+    private void addComponents() throws IOException, AppException, SQLException {
         mnPanelTitulo.add(mnLblTitulo);
         add(mnPanelTitulo ,BorderLayout.NORTH);
         add(new PanelTabla(), BorderLayout.CENTER);

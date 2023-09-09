@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.sql.Statement;
-import FrameWork.AppExceptionAriel;
+import FrameWork.AppException;
 
 public abstract class SQLiteDataHelper {
     private  String DBPathConnection = "jdbc:sqlite:dataBase\\mnBaseDatos.db"; //URL de la conexion a la base de datos.
@@ -16,31 +16,31 @@ public abstract class SQLiteDataHelper {
     protected PreparedStatement mnPreparedSt; 
     protected String mnConsultaSQL;
     protected Statement mnSt;
-    public SQLiteDataHelper() throws AppExceptionAriel{
+    public SQLiteDataHelper() throws AppException{
         mnConn=openConnection();
         mnRs=null;
         mnPreparedSt=null;
         mnConsultaSQL=null;
         mnSt=null;
     } 
-    public  synchronized Connection openConnection() throws AppExceptionAriel{
+    public  synchronized Connection openConnection() throws AppException{
         try {
             if(mnConn == null)
                 mnConn = DriverManager.getConnection(DBPathConnection);
         } catch (SQLException e) {
-            throw new AppExceptionAriel(e,"SQLiteDataHelper","Fallo la conexion a la base de datos");
+            throw new AppException(e,"SQLiteDataHelper","Fallo la conexion a la base de datos");
         } 
         return mnConn; 
     }
-    protected  void closeConnection() throws AppExceptionAriel{
+    protected  void closeConnection() throws AppException{
         try {
             if (mnConn != null)
                 mnConn.close();
         } catch (Exception e) {
-            throw new AppExceptionAriel(e,"SQLiteDataHelper", "Fallo la conección con la base de datos");
+            throw new AppException(e,"SQLiteDataHelper", "Fallo la conección con la base de datos");
         }
     }
-    protected ResultSet mnGetResulSet(String mnConsultaSQL) throws AppExceptionAriel{
+    protected ResultSet mnGetResulSet(String mnConsultaSQL) throws AppException{
         try {
             mnConn=openConnection();
             mnSt= mnConn.createStatement();
@@ -52,7 +52,7 @@ public abstract class SQLiteDataHelper {
         return mnRs;
             
     }
-    public abstract ResultSet mnGetAll()  throws AppExceptionAriel;
+    public abstract ResultSet mnGetAll()  throws AppException;
     }
     // public static void crearTablaDesdeCSV(List<String> lines, String nombreTabla)throws AppExceptionAriel, SQLException{
     //     if (lines !=null && !lines.isEmpty()) {

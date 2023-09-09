@@ -1,4 +1,4 @@
-package BusinessLogic.Facade;
+package BusinessLogic;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -7,10 +7,10 @@ import java.util.List;
 import BusinessLogic.Entities.MNHorario;
 import BusinessLogic.Entities.MNUsuario;
 import DataAccess.MNHorarioDAC;
-import FrameWork.AppExceptionAriel;
+import FrameWork.AppException;
 public class MNHorarioBl {
     MNHorarioDAC mnHorarioDAC;
-    public MNHorarioBl () throws AppExceptionAriel{
+    public MNHorarioBl () throws AppException{
         mnHorarioDAC= new MNHorarioDAC();
     }
     /**
@@ -24,7 +24,7 @@ public class MNHorarioBl {
             mnHorarioDAC.mnInsertarDatos(mnHorarioDia.get(i), mnHorario.get(i));
         }
     }
-        public List<MNHorario> mnGetAll() throws AppExceptionAriel {
+        public List<MNHorario> mnGetAll() throws AppException {
         ResultSet mnRs = mnHorarioDAC.mnGetAll();
         List<MNHorario> mnListaHorario = new ArrayList<>();
         MNHorario mnHorario;
@@ -39,7 +39,7 @@ public class MNHorarioBl {
                 mnRs.close();
                 return mnListaHorario;
         } catch (SQLException e) {
-            throw new AppExceptionAriel(e, getClass(), "mnGetAll()");
+            throw new AppException(e, getClass(), "mnGetAll()");
         }
     }
 

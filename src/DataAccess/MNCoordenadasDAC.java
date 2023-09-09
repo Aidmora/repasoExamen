@@ -4,10 +4,10 @@ import java.awt.List;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import FrameWork.AppExceptionAriel;
+import FrameWork.AppException;
 
 public class MNCoordenadasDAC extends SQLiteDataHelper {
-    public MNCoordenadasDAC() throws AppExceptionAriel {
+    public MNCoordenadasDAC() throws AppException {
         super();
     }
 
@@ -27,7 +27,7 @@ public class MNCoordenadasDAC extends SQLiteDataHelper {
     }
 
     @Override
-    public ResultSet mnGetAll() throws AppExceptionAriel {
+    public ResultSet mnGetAll() throws AppException {
         mnConsultaSQL= "SELECT Coordenada  FROM MN_COORDENADAS";
         
         return mnGetResulSet(mnConsultaSQL);    

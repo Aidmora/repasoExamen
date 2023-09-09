@@ -9,8 +9,8 @@ import java.util.HashSet;
 import java.util.List;
 
 import DataAccess.SQLiteDataHelper;
-import FrameWork.AppExceptionAriel;
-public class LecturaArchivo {
+import FrameWork.AppException;
+public class MNLecturaArchivo {
     public List<String> mnLines;
     public List<String> mnArsenalTipo=new ArrayList<>();
     public List<String> mnCoordenadas=new ArrayList<>();
@@ -24,10 +24,10 @@ public class LecturaArchivo {
      * 
      * @param directorioHorario
      * @throws IOException
-     * @throws AppExceptionAriel
+     * @throws AppException
      * @throws SQLException
      */
-    public void LeerArchivos(String directorioHorario) throws IOException, AppExceptionAriel, SQLException{
+    public void LeerArchivos(String directorioHorario) throws IOException, AppException, SQLException{
         File f = new File(directorioHorario);
         if(f.isDirectory()){
             String[] fileNames = f.list();

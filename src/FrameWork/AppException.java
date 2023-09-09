@@ -1,18 +1,18 @@
 package FrameWork;
 
-public class AppExceptionAriel extends Exception  {
+public class AppException extends Exception  {
 
-    public AppExceptionAriel(Throwable cause, Object className, String message) {
+    public AppException(Throwable cause, Object className, String message) {
         super(className +":"+message, cause);
         setDebuggingLog();
     }
 
-    public AppExceptionAriel(Throwable cause, Object className) {
+    public AppException(Throwable cause, Object className) {
         super(className +":" + "Error no especificado", cause);
         setDebuggingLog();
     }
 
-    public AppExceptionAriel(String message) {
+    public AppException(String message) {
         super("Error en clase no especificada "+":"+message);
         setDebuggingLog();
     }

@@ -1,4 +1,4 @@
-package BusinessLogic.Facade;
+package BusinessLogic;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,11 +8,11 @@ import java.util.List;
 import BusinessLogic.Entities.MNCoordenadas;
 import BusinessLogic.Entities.MNHorario;
 import DataAccess.MNCoordenadasDAC;
-import FrameWork.AppExceptionAriel;
+import FrameWork.AppException;
 
 public class MNCoordenadasBL {
     MNCoordenadasDAC mnCoordenadasDAC;
-    public MNCoordenadasBL () throws AppExceptionAriel{
+    public MNCoordenadasBL () throws AppException{
         mnCoordenadasDAC= new MNCoordenadasDAC();
     }
     /**
@@ -24,7 +24,7 @@ public class MNCoordenadasBL {
             mnCoordenadasDAC.mnInsertarDatos(mnCoordenadasStr);
         }
     }
-    public List<MNCoordenadas> mnGetAll() throws AppExceptionAriel {
+    public List<MNCoordenadas> mnGetAll() throws AppException {
         ResultSet mnRs = mnCoordenadasDAC.mnGetAll();
         List<MNCoordenadas> mnListaCoordenadas = new ArrayList<>();
         MNCoordenadas mnCoordenadas;
@@ -37,7 +37,7 @@ public class MNCoordenadasBL {
                 mnRs.close();
                 return mnListaCoordenadas;
         } catch (SQLException e) {
-            throw new AppExceptionAriel(e, getClass(), "mnGetAll()");
+            throw new AppException(e, getClass(), "mnGetAll()");
         }
     }
 }

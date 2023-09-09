@@ -1,4 +1,4 @@
-package BusinessLogic.Facade;
+package BusinessLogic;
 
 import java.util.List;
 import java.sql.ResultSet;
@@ -7,16 +7,16 @@ import java.util.ArrayList;
 
 import BusinessLogic.Entities.MNUsuario;
 import DataAccess.MNUsuarioDAC;
-import FrameWork.AppExceptionAriel;
+import FrameWork.AppException;
 
 public class MNUsuarioBL {
     protected MNUsuarioDAC mnUsuarioDAC;
 
-    public MNUsuarioBL() throws AppExceptionAriel {
+    public MNUsuarioBL() throws AppException {
         mnUsuarioDAC = new MNUsuarioDAC();
     }
     
-    public List<MNUsuario> mnGetAll() throws AppExceptionAriel {
+    public List<MNUsuario> mnGetAll() throws AppException {
         ResultSet mnRs = mnUsuarioDAC.mnGetAll();
         List<MNUsuario> mnListaUsuarios = new ArrayList<>();
         MNUsuario mnUsuario;
@@ -31,7 +31,7 @@ public class MNUsuarioBL {
                 mnRs.close();
                 return mnListaUsuarios;
         } catch (SQLException e) {
-            throw new AppExceptionAriel(e, getClass(), "mnGetAll()");
+            throw new AppException(e, getClass(), "mnGetAll()");
         }
     }
 }

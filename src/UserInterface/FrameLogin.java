@@ -9,8 +9,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import DataAccess.MNUsuarioDAC;
-import FrameWork.AppExceptionAriel;
-import LecturaArchivos.LecturaArchivo;
+import FrameWork.AppException;
+import LecturaArchivos.MNLecturaArchivo;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -28,8 +28,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
+import BusinessLogic.MNUsuarioBL;
 import BusinessLogic.Entities.MNUsuario;
-import BusinessLogic.Facade.MNUsuarioBL;
 
 public class FrameLogin extends JFrame implements ActionListener{
     private JLabel mnLblUsuario, mnLblClave;
@@ -122,7 +122,7 @@ public class FrameLogin extends JFrame implements ActionListener{
                         System.exit(0); 
                     }
                 }
-            } catch (HeadlessException | AppExceptionAriel e1) {
+            } catch (HeadlessException | AppException e1) {
                 e1.printStackTrace();
             } catch (IOException e1) {
                 e1.printStackTrace();
@@ -133,7 +133,7 @@ public class FrameLogin extends JFrame implements ActionListener{
         }
     }
 
-    private boolean validarCredenciales(String mnUsuarioIng, String mnClaveIng) throws AppExceptionAriel {
+    private boolean validarCredenciales(String mnUsuarioIng, String mnClaveIng) throws AppException {
         List<MNUsuario> mnListaUsuarios = new MNUsuarioBL().mnGetAll();
 
         for (MNUsuario mnUsuario : mnListaUsuarios) {

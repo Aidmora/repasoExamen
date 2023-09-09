@@ -2,15 +2,15 @@ package DataAccess;
 
 import java.sql.ResultSet;
 
-import FrameWork.AppExceptionAriel;
+import FrameWork.AppException;
 
 public class MNUsuarioDAC  extends SQLiteDataHelper {
 
-    public MNUsuarioDAC() throws AppExceptionAriel {
+    public MNUsuarioDAC() throws AppException {
         super();
     }
     @Override
-    public ResultSet mnGetAll() throws AppExceptionAriel {
+    public ResultSet mnGetAll() throws AppException {
         mnConsultaSQL= "SELECT IdUsuario, NombreUsuario, ContrasenaUsuario FROM MN_USUARIO";
         
         return mnGetResulSet(mnConsultaSQL);

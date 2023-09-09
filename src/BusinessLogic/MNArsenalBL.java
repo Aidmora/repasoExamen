@@ -1,4 +1,4 @@
-package BusinessLogic.Facade;
+package BusinessLogic;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,11 +8,11 @@ import java.util.List;
 import BusinessLogic.Entities.MNArsenal;
 import BusinessLogic.Entities.MNArsenalTipo;
 import DataAccess.MNArsenalDAC;
-import FrameWork.AppExceptionAriel;
+import FrameWork.AppException;
 
 public class MNArsenalBL {
     MNArsenalDAC mnArsenalDAC;
-    public MNArsenalBL() throws AppExceptionAriel{
+    public MNArsenalBL() throws AppException{
        mnArsenalDAC= new MNArsenalDAC(); 
     }
     /**
@@ -24,7 +24,7 @@ public class MNArsenalBL {
             mnArsenalDAC.mnInsertarDatos(mnArsnealStr);
         }
     }
-    public List<MNArsenal> mnGetAll() throws AppExceptionAriel {
+    public List<MNArsenal> mnGetAll() throws AppException {
         ResultSet mnRs = mnArsenalDAC.mnGetAll();
         List<MNArsenal> mnListaArsenal = new ArrayList<>();
         MNArsenal mnArsenal;
@@ -37,7 +37,7 @@ public class MNArsenalBL {
                 mnRs.close();
                 return mnListaArsenal;
         } catch (SQLException e) {
-            throw new AppExceptionAriel(e, getClass(), "mnGetAll()");
+            throw new AppException(e, getClass(), "mnGetAll()");
         }
     }
 }

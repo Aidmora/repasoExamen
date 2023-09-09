@@ -1,20 +1,20 @@
 package LecturaArchivos;
 
-import BusinessLogic.Facade.MNArsenalBL;
-import BusinessLogic.Facade.MNArsenalTipoBL;
-import BusinessLogic.Facade.MNCoordenadasBL;
-import BusinessLogic.Facade.MNHorarioBl;
-import FrameWork.AppExceptionAriel;
+import BusinessLogic.MNArsenalBL;
+import BusinessLogic.MNArsenalTipoBL;
+import BusinessLogic.MNCoordenadasBL;
+import BusinessLogic.MNHorarioBl;
+import FrameWork.AppException;
 
 public class MNCargarArchivos {
-    private LecturaArchivo lecturaArchivo;
+    private MNLecturaArchivo lecturaArchivo;
 
-    public MNCargarArchivos(LecturaArchivo lecturaArchivo){
+    public MNCargarArchivos(MNLecturaArchivo lecturaArchivo){
         this.lecturaArchivo = lecturaArchivo;
 
     }
 
-    public void mnCargar() throws AppExceptionAriel {
+    public void mnCargar() throws AppException {
         new MNArsenalBL().mnSetAllData(lecturaArchivo.mnArsenalNombre);
         new MNArsenalTipoBL().mnSetAllData(lecturaArchivo.mnArsenalTipoNombre);
         new MNCoordenadasBL().mnSetAllData(lecturaArchivo.mnCoordenadas);

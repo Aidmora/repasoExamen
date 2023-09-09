@@ -1,10 +1,10 @@
 package UserInterface;
 
 import java.awt.*;
-import LecturaArchivos.LecturaArchivo;
+import LecturaArchivos.MNLecturaArchivo;
 import LecturaArchivos.MNCargarArchivos;
+import BusinessLogic.MNUsuarioBL;
 import BusinessLogic.Entities.MNUsuario;
-import BusinessLogic.Facade.MNUsuarioBL;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -17,7 +17,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 
-import FrameWork.AppExceptionAriel;
+import FrameWork.AppException;
 
 public class PanelTabla extends JPanel {
     
@@ -26,11 +26,11 @@ public class PanelTabla extends JPanel {
     private String[] mnHeader;
     private String[][] mnData;
     private List<String[]> mnDataList;
-    private LecturaArchivo mnLecturaArchivo;
+    private MNLecturaArchivo mnLecturaArchivo;
     private MNCargarArchivos mnCargarArchivos;
     private final String RUTA = "MNCoordenadas";
 
-    PanelTabla() throws IOException, AppExceptionAriel, SQLException {
+    PanelTabla() throws IOException, AppException, SQLException {
         mnSetCustomization();
         mnInitComponents();
         mnAddComponents();
@@ -43,10 +43,10 @@ public class PanelTabla extends JPanel {
         setLayout(new FlowLayout());
     }
 
-    private void mnInitComponents() throws IOException, AppExceptionAriel, SQLException {
+    private void mnInitComponents() throws IOException, AppException, SQLException {
         mnHeader = new String[]{"Usuario", "Tipo Arsenal", "Coord.", "Arsenal", "Día", "Hora"};
         mnDataList = new ArrayList<>();
-        mnLecturaArchivo = new LecturaArchivo();
+        mnLecturaArchivo = new MNLecturaArchivo();
         mnLecturaArchivo.LeerArchivos(RUTA);
         mnCargarArchivos = new MNCargarArchivos(mnLecturaArchivo);
         // mnCargarArchivos.mnCargar();
@@ -57,7 +57,7 @@ public class PanelTabla extends JPanel {
 
     }
     
-    private void mnGenerarTabla() throws AppExceptionAriel {
+    private void mnGenerarTabla() throws AppException {
         String[] mnFila;
         MNUsuarioBL mnUsuarrioBL = new MNUsuarioBL();
         List<MNUsuario> listaUsuarios = mnUsuarrioBL.mnGetAll();

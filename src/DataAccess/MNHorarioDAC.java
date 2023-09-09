@@ -3,10 +3,10 @@ package DataAccess;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import FrameWork.AppExceptionAriel;
+import FrameWork.AppException;
 
 public class MNHorarioDAC extends SQLiteDataHelper {
-    public MNHorarioDAC() throws AppExceptionAriel {
+    public MNHorarioDAC() throws AppException {
         super();
     }
 
@@ -25,7 +25,7 @@ public class MNHorarioDAC extends SQLiteDataHelper {
     }
 
     @Override
-    public ResultSet mnGetAll() throws AppExceptionAriel {
+    public ResultSet mnGetAll() throws AppException {
         return null;
     }
 

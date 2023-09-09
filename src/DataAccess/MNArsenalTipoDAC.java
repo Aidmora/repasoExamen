@@ -3,10 +3,10 @@ package DataAccess;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import FrameWork.AppExceptionAriel;
+import FrameWork.AppException;
 
 public class MNArsenalTipoDAC extends SQLiteDataHelper {
-    public MNArsenalTipoDAC() throws AppExceptionAriel {
+    public MNArsenalTipoDAC() throws AppException {
         super();
     }
 
@@ -24,7 +24,7 @@ public class MNArsenalTipoDAC extends SQLiteDataHelper {
     }
 
     @Override
-    public ResultSet mnGetAll() throws AppExceptionAriel {
+    public ResultSet mnGetAll() throws AppException {
         mnConsultaSQL= "SELECT NombreArsenalTipo  FROM MN_ARSENALTIPO";
         
         return mnGetResulSet(mnConsultaSQL); 
