@@ -12,6 +12,8 @@ import FrameWork.AppExceptionAriel;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 public class login extends JFrame implements ActionListener{
     private JLabel etiquieta, etiquieta2;
     private JTextField texto;
@@ -49,7 +51,6 @@ public class login extends JFrame implements ActionListener{
         if (e.getSource() == boton1) {
             String usuarioIngresado = texto.getText();
             String contrasenaIngresada = new String(texto2.getPassword());
-
             if (validarCredenciales(usuarioIngresado, contrasenaIngresada)) {
                 JOptionPane.showMessageDialog(null, "¡Sesión Iniciada!");
                 label.setVisible(false); 
@@ -85,4 +86,24 @@ public class login extends JFrame implements ActionListener{
         label.setVisible(true);
         label.setLocationRelativeTo(null);
     }
+    public String encriptar(String mnContrasena) {
+
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] inputBytes = mnContrasena.getBytes();
+            byte[] hashBytes = md.digest(inputBytes);
+
+            StringBuilder hexStringBuilder = new StringBuilder();
+            for (byte b : hashBytes) {
+                String hex = String.format("%02x", b);
+                hexStringBuilder.append(hex);
+            }
+
+            return  hexStringBuilder.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return null;
+}
+
 }
