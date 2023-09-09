@@ -68,7 +68,7 @@ public class FrameLogin extends JFrame implements ActionListener{
         mnConstraints = new GridBagConstraints();
         mnConstraints.insets = new Insets(10, 10, 10, 10);
 
-        setSize(800, 600);
+        setSize(1000, 600);
         setLocationRelativeTo(null);
     }
 
@@ -143,14 +143,7 @@ public class FrameLogin extends JFrame implements ActionListener{
         }
         return false;
     }
-    
-    // public void mostrarPantalla(){
-    //     BibliotecaSplash bibliotecaSplash= new BibliotecaSplash();
-    //     bibliotecaSplash.mostrarPantallazo();
-    //     label.setBounds(0, 0, 310, 730);
-    //     label.setVisible(true);
-    //     label.setLocationRelativeTo(null);
-    // }
+
 
     public String mnEncriptar(String mnContrasena) {
         try {

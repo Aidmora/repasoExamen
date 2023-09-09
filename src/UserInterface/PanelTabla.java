@@ -2,6 +2,10 @@ package UserInterface;
 
 import java.awt.*;
 import LecturaArchivos.LecturaArchivo;
+import LecturaArchivos.MNCargarArchivos;
+import BusinessLogic.Entities.MNUsuario;
+import BusinessLogic.Facade.MNUsuarioBL;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+
 import FrameWork.AppExceptionAriel;
 
 public class PanelTabla extends JPanel {
@@ -21,7 +26,8 @@ public class PanelTabla extends JPanel {
     private String[] mnHeader;
     private String[][] mnData;
     private List<String[]> mnDataList;
-    private LecturaArchivo lecturaArchivo;
+    private LecturaArchivo mnLecturaArchivo;
+    private MNCargarArchivos mnCargarArchivos;
     private final String RUTA = "MNCoordenadas";
 
     PanelTabla() throws IOException, AppExceptionAriel, SQLException {
@@ -40,41 +46,55 @@ public class PanelTabla extends JPanel {
     private void mnInitComponents() throws IOException, AppExceptionAriel, SQLException {
         mnHeader = new String[]{"Usuario", "Tipo Arsenal", "Coord.", "Arsenal", "Día", "Hora"};
         mnDataList = new ArrayList<>();
-        lecturaArchivo = new LecturaArchivo();
-        lecturaArchivo.LeerArchivos(RUTA);
+        mnLecturaArchivo = new LecturaArchivo();
+        mnLecturaArchivo.LeerArchivos(RUTA);
+        mnCargarArchivos = new MNCargarArchivos(mnLecturaArchivo);
+        // mnCargarArchivos.mnCargar();
+
     }
 
     private void mnAddComponents() {
 
-
     }
     
-    private void mnGenerarTabla() {
+    private void mnGenerarTabla() throws AppExceptionAriel {
         String[] mnFila;
-        int mnIndex = 0;
+        MNUsuarioBL mnUsuarrioBL = new MNUsuarioBL();
+        List<MNUsuario> listaUsuarios = mnUsuarrioBL.mnGetAll();
+        
         // for (String mnData : mnFila) {
-        System.out.println(lecturaArchivo.mnCoordenadas.size() + " : tamano coordenadas");
-        for (int i = 0; i < lecturaArchivo.mnCoordenadas.size(); i++) {
-            mnFila = new String[6]; 
-            mnFila[0] = "01";
-            System.out.println("01");
-            mnFila[1] = " Arsenal ";
-            mnFila[2] = lecturaArchivo.mnCoordenadas.get(mnIndex).substring(0, 2);
-            System.out.println(lecturaArchivo.mnCoordenadas.get(mnIndex));
-            mnFila[3] = lecturaArchivo.mnArsenalNombre.get(mnIndex);
-            mnFila[4] = lecturaArchivo.mnHorarioDia.get(mnIndex);
-            mnFila[5] = lecturaArchivo.mnHorario.get(mnIndex);
-            mnDataList.add(mnFila);
-            mnIndex++;
+            for (int i = 0; i < mnLecturaArchivo.mnCoordenadas.size(); i++) {
+                int  mnLetra =  mnLecturaArchivo.mnArsenal.get(i).length();
+                System.out.println(mnLetra);
+                for (int j = 0; j < mnLetra; j++) {
+                    String mnArs = " ";
+                    System.out.println("indice i: " + i);
+                    System.out.println("indice j: " + j);
+                    System.out.println("palabra: " +  mnLecturaArchivo.mnArsenal.get(i));
+                    if (mnLecturaArchivo.mnArsenal.get(i).charAt(j) == 'a') mnArs = "Aéreo";
+                    if (mnLecturaArchivo.mnArsenal.get(i).charAt(j) == 'b') mnArs = "Marítimo";
+                    if (mnLecturaArchivo.mnArsenal.get(i).charAt(j) == 'c') mnArs = "Terrestre";
+                    if (mnLecturaArchivo.mnArsenal.get(i).charAt(j) == 'd') mnArs = "Aéreo";
+                    if (mnLecturaArchivo.mnArsenal.get(i).charAt(j) == 't') mnArs = "Terrestre";
+
+                    mnFila = new String[6]; 
+                    mnFila[0] = listaUsuarios.get(i%3).getNombreUsuario();
+                    System.out.println(mnArs);
+                    mnFila[1] = mnArs;
+                    mnFila[2] = mnLecturaArchivo.mnCoordenadas.get(i).substring(0, 2);
+                    mnFila[3] = mnLecturaArchivo.mnArsenalNombre.get(i);
+                    mnFila[4] = mnLecturaArchivo.mnHorarioDia.get(i);
+                    mnFila[5] = mnLecturaArchivo.mnHorario.get(i);
+                    mnDataList.add(mnFila);
+            }
         }
+        
         
         mnData = new String[mnDataList.size()][6];
         mnTableModel = new DefaultTableModel(mnData, mnHeader);
         mnTableModel.setRowCount(0);
         
         for (int i = 0; i < mnDataList.size(); i++) {
-        //     mnData[i] = ;
-            System.out.println( mnDataList.get(i)[1] + ": coordenada");
             mnTableModel.addRow(mnDataList.get(i));
         }
 
