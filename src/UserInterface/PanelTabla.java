@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -30,65 +29,68 @@ public class PanelTabla extends JPanel {
     private MNCargarArchivos mnCargarArchivos;
     private final String RUTA = "MNCoordenadas";
 
+    /*
+     * Constructor de la clase PanelTabla
+     */
     PanelTabla() throws IOException, AppException, SQLException {
         mnSetCustomization();
         mnInitComponents();
-        mnAddComponents();
         mnGenerarTabla();
 
     }
 
+    /*
+     * mnSetCustomization: establece las propiedades que van a tener los diferentes componentes
+     * incluido el propio PanelTabla
+     */
     private void mnSetCustomization() {
-        setBackground(Color.MAGENTA); 
+        // setBackground(Color.MAGENTA); 
         setLayout(new FlowLayout());
     }
 
+    /*
+     * mnInitComponents: inicializa el panel y los componentes necesarios para su funcionamiento
+     */
     private void mnInitComponents() throws IOException, AppException, SQLException {
         mnHeader = new String[]{"Usuario", "Tipo Arsenal", "Coord.", "Arsenal", "Día", "Hora"};
         mnDataList = new ArrayList<>();
         mnLecturaArchivo = new MNLecturaArchivo();
         mnLecturaArchivo.LeerArchivos(RUTA);
         mnCargarArchivos = new MNCargarArchivos(mnLecturaArchivo);
-        // mnCargarArchivos.mnCargar();
+        mnCargarArchivos.mnCargar();
 
     }
 
-    private void mnAddComponents() {
-
-    }
-    
+   
+    /*
+     * mnGenerarTabla: se encarga de generar la tabla con la información extraída por el archivo csv
+     */
     private void mnGenerarTabla() throws AppException {
         String[] mnFila;
         MNUsuarioBL mnUsuarrioBL = new MNUsuarioBL();
         List<MNUsuario> listaUsuarios = mnUsuarrioBL.mnGetAll();
         
         // for (String mnData : mnFila) {
-            for (int i = 0; i < mnLecturaArchivo.mnCoordenadas.size(); i++) {
-                int  mnLetra =  mnLecturaArchivo.mnArsenal.get(i).length();
-                System.out.println(mnLetra);
-                for (int j = 0; j < mnLetra; j++) {
-                    String mnArs = " ";
-                    System.out.println("indice i: " + i);
-                    System.out.println("indice j: " + j);
-                    System.out.println("palabra: " +  mnLecturaArchivo.mnArsenal.get(i));
-                    if (mnLecturaArchivo.mnArsenal.get(i).charAt(j) == 'a') mnArs = "Aéreo";
-                    if (mnLecturaArchivo.mnArsenal.get(i).charAt(j) == 'b') mnArs = "Marítimo";
-                    if (mnLecturaArchivo.mnArsenal.get(i).charAt(j) == 'c') mnArs = "Terrestre";
-                    if (mnLecturaArchivo.mnArsenal.get(i).charAt(j) == 'd') mnArs = "Aéreo";
-                    if (mnLecturaArchivo.mnArsenal.get(i).charAt(j) == 't') mnArs = "Terrestre";
+        for (int i = 0; i < mnLecturaArchivo.mnCoordenadas.size(); i++) {
+            int  mnLetra =  mnLecturaArchivo.mnArsenal.get(i).length();
+            for (int j = 0; j < mnLetra; j++) {
+                String mnArs = " ";
+                if (mnLecturaArchivo.mnArsenal.get(i).charAt(j) == 'a') mnArs = "Aéreo";
+                if (mnLecturaArchivo.mnArsenal.get(i).charAt(j) == 'b') mnArs = "Marítimo";
+                if (mnLecturaArchivo.mnArsenal.get(i).charAt(j) == 'c') mnArs = "Terrestre";
+                if (mnLecturaArchivo.mnArsenal.get(i).charAt(j) == 'd') mnArs = "Aéreo";
+                if (mnLecturaArchivo.mnArsenal.get(i).charAt(j) == 't') mnArs = "Terrestre";
 
-                    mnFila = new String[6]; 
-                    mnFila[0] = listaUsuarios.get(i%3).getNombreUsuario();
-                    System.out.println(mnArs);
-                    mnFila[1] = mnArs;
-                    mnFila[2] = mnLecturaArchivo.mnCoordenadas.get(i).substring(0, 2);
-                    mnFila[3] = mnLecturaArchivo.mnArsenalNombre.get(i);
-                    mnFila[4] = mnLecturaArchivo.mnHorarioDia.get(i);
-                    mnFila[5] = mnLecturaArchivo.mnHorario.get(i);
-                    mnDataList.add(mnFila);
+                mnFila = new String[6]; 
+                mnFila[0] = listaUsuarios.get(i%3).getNombreUsuario();
+                mnFila[1] = mnArs;
+                mnFila[2] = mnLecturaArchivo.mnCoordenadas.get(i).substring(0, 2);
+                mnFila[3] = mnLecturaArchivo.mnArsenalNombre.get(i);
+                mnFila[4] = mnLecturaArchivo.mnHorarioDia.get(i);
+                mnFila[5] = mnLecturaArchivo.mnHorario.get(i);
+                mnDataList.add(mnFila);
             }
         }
-        
         
         mnData = new String[mnDataList.size()][6];
         mnTableModel = new DefaultTableModel(mnData, mnHeader);
@@ -117,5 +119,5 @@ public class PanelTabla extends JPanel {
         add(new JScrollPane(mnTabla));
 
     }
-    // mnTableModel.addRow(mnFila[mnIndex]);
+
 }
