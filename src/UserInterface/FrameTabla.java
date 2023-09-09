@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 public class FrameTabla extends JFrame {
     private final String MN_TITULO = "Tabla";
-    private final int    MN_ANCHO  = 800;
+    private final int    MN_ANCHO  = 1000;
     private final int    MN_ALTO   = 600;
     private JPanel mnPanelTitulo;
     private JLabel mnLblTitulo;
