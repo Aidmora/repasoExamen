@@ -5,7 +5,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         LecturaArchivo lc= new LecturaArchivo();
         lc.LeerArchivos(directorioHorario);
-        BibliotecaMenu menu= new BibliotecaMenu();
-        menu.mostrarMenu();
+        login lg= new login();
+        lg.mostrarPantalla();
     }
 }

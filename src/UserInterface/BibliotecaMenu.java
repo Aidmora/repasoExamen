@@ -101,7 +101,6 @@ private void showTable() throws AppExceptionAriel {
         
     }
     public void mostrarMenu(){
-        bibliotecaSplash.mostrarPantallazo();
         setVisible(true); 
     }
     private void mostrarInfo() throws AppExceptionAriel {
