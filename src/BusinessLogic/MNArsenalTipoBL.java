@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 
 import BusinessLogic.Entities.MNArsenalTipo;
-import BusinessLogic.Entities.MNCoordenadas;
 import DataAccess.MNArsenalTipoDAC;
 import FrameWork.AppException;
 

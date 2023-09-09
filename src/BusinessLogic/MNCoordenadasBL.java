@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import BusinessLogic.Entities.MNCoordenadas;
-import BusinessLogic.Entities.MNHorario;
 import DataAccess.MNCoordenadasDAC;
 import FrameWork.AppException;
 

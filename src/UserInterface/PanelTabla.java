@@ -100,10 +100,6 @@ public class PanelTabla extends JPanel {
             mnTableModel.addRow(mnDataList.get(i));
         }
 
-        int rowHeight = 30;
-        Font fuente = new Font("Arial", Font.PLAIN, 16);
-        Font fuente2 = new Font("Arial", Font.BOLD, 16);
-
         mnTabla = new JTable(mnTableModel);
         mnTabla.setShowHorizontalLines(true);
         mnTabla.setGridColor(Color.LIGHT_GRAY);

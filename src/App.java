@@ -1,6 +1,4 @@
 
-
-import LecturaArchivos.MNCargarArchivos;
 import UserInterface.*;
 public class App {
     private static final String MN_NOMBRE_ARIEL = "Mora Jarrín Ariel David";

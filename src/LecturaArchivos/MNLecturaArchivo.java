@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import DataAccess.SQLiteDataHelper;
 import FrameWork.AppException;
 public class MNLecturaArchivo {
     public List<String> mnLines;

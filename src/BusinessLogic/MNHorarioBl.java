@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import BusinessLogic.Entities.MNHorario;
-import BusinessLogic.Entities.MNUsuario;
 import DataAccess.MNHorarioDAC;
 import FrameWork.AppException;
 public class MNHorarioBl {

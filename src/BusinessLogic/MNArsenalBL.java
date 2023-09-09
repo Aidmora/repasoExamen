@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import BusinessLogic.Entities.MNArsenal;
-import BusinessLogic.Entities.MNArsenalTipo;
 import DataAccess.MNArsenalDAC;
 import FrameWork.AppException;
 
