@@ -1,0 +1,11 @@
+﻿IdLibro;IdAutor;NombreLibro;FechaPublicacion;Genero;Editorial;Estado
+1;1;El Secreto;2020-03-15;Autoayuda;Editorial;A
+2;2;La Aventura;2019-07-20;Aventura;Editorial Y;A
+3;3;Ciencia Ficción 101;2021-01-10;Ciencia Ficción;Editorial Z;A
+4;4;Historia Antigua;2018-05-02;Historia;Editorial A;A
+5;5;El Misterio;2022-08-30;Misterio;Editorial B;A
+6;6;Aprende a Programar;2017-11-12;Informática;Editorial C;A
+7;7;Amor y Romance;2019-04-25;Romance;Editorial D;A
+8;8;Viaje al Futuro;2020-06-08;Ciencia Ficción;Editorial E;A
+9;9;Misterios por Resolver;2021-02-18;Misterio;Editorial F;A
+10;10;Aventuras en la Selva;2018-09-14;Aventura;Editorial G;A

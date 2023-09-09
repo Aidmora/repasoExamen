@@ -1,0 +1,80 @@
+
+
+public class BibliotecaMenu extends JFrame implements ActionListener{
+    private BibliotecaBL  bibliotecaBL  = null;
+    private Biblioteca   biblioteca    = null;
+    private JPanel pnlTabla   = new JPanel();
+    public BibliotecaSplash bibliotecaSplash= new BibliotecaSplash();
+    public ArielButton mostrarTabla;
+
+    public BibliotecaMenu () throws AppExceptionAriel{
+        bibliotecaBL= new BibliotecaBL();
+        setTitle("Biblioteca");
+        setGridBagLayout();
+        showTable();
+        // /IntefazGrafica/modoGold.png
+        mostrarTabla=new ArielButton("/UserInterface/Img/libroAbierto3.png");
+        // add(mostrarTabla);
+        mostrarTabla.addActionListener(new ActionListener() {
+            @Override
+        public void actionPerformed(ActionEvent e) {
+            if(e.getSource()==mostrarTabla){
+            }
+        }
+        });
+        
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        pack();
+        setLocationRelativeTo(null); 
+        
+    }
+    private void showTable() throws AppExceptionAriel {
+        String[] header = {"Comentario", "Libro", "Autor"};
+        Object[][] data = new Object[bibliotecaBL.getAllData().size()][3];  
+        int index = 0;
+        for(Biblioteca bli : bibliotecaBL.getAllData()) {
+            data[index][0] = bli.getReseña();
+            data[index][1] = bli.getNombreLibro();
+            data[index][2] = bli.getNombreAutor();
+            index++;
+        }
+        
+        JTable table  = new JTable(data, header);
+        table.setShowHorizontalLines(true);
+        table.setGridColor(Color.lightGray);
+        table.setRowSelectionAllowed(true);
+        table.setColumnSelectionAllowed(false);
+
+        table.setPreferredScrollableViewportSize(new Dimension(650, 150));
+        table.setFillsViewportHeight(true);
+
+        pnlTabla.removeAll();
+        pnlTabla.add(table);
+        JScrollPane scrollPane = new JScrollPane(table);
+        pnlTabla.add(scrollPane);
+    }
+    public void mostrarInfoPaginada(){
+
+    }
+    public void setGridBagLayout(){
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc= new GridBagConstraints();
+        gbc.gridy = 2;       gbc.gridx=0;
+        gbc.gridwidth=3;                   
+        gbc.ipady = 250;                   
+        gbc.ipadx = 750;                   
+        pnlTabla.add(new Label("Loading data..."));
+        pnlTabla.setBackground(Color.BLACK);
+        add(pnlTabla, gbc);
+        
+        
+    }
+    public void mostrarMenu(){
+        bibliotecaSplash.mostrarPantallazo();
+        setVisible(true); 
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+    }
+}
