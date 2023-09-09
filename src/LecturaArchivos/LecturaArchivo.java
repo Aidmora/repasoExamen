@@ -1,4 +1,4 @@
-package DataAccess;
+package LecturaArchivos;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.List;
 
+import DataAccess.SQLiteDataHelper;
 import FrameWork.AppExceptionAriel;
 public class LecturaArchivo {
     public List<String> lines;
@@ -19,6 +20,7 @@ public class LecturaArchivo {
                     lines = Files.readAllLines(Paths.get(nombreArchivo));
                     String nombreTabla= nomArchivo.substring(0,nomArchivo.lastIndexOf("."));
                     SQLiteDataHelper.crearTablaDesdeCSV(lines,nombreTabla);
+
                           
                 }
             }

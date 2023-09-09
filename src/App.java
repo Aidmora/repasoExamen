@@ -1,4 +1,4 @@
-import DataAccess.LecturaArchivo;
+import LecturaArchivos.LecturaArchivo;
 import UserInterface.*;
 public class App {
     public static  String directorioHorario= ".\\Libreria";
