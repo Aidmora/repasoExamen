@@ -59,7 +59,6 @@ public class PanelTabla extends JPanel {
     
     private void mnGenerarTabla() throws AppExceptionAriel {
         String[] mnFila;
-        int mnIndex = 0;
         MNUsuarioBL mnUsuarrioBL = new MNUsuarioBL();
         List<MNUsuario> listaUsuarios = mnUsuarrioBL.mnGetAll();
         
@@ -87,7 +86,6 @@ public class PanelTabla extends JPanel {
                     mnFila[4] = mnLecturaArchivo.mnHorarioDia.get(i);
                     mnFila[5] = mnLecturaArchivo.mnHorario.get(i);
                     mnDataList.add(mnFila);
-                    mnIndex++;
             }
         }
         
