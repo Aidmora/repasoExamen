@@ -27,7 +27,6 @@ public abstract class SQLiteDataHelper {
         try {
             if(mnConn == null)
                 mnConn = DriverManager.getConnection(DBPathConnection);
-            System.out.println("La conexión con la base de datos se ha establecido.");
         } catch (SQLException e) {
             throw new AppExceptionAriel(e,"SQLiteDataHelper","Fallo la conexion a la base de datos");
         } 

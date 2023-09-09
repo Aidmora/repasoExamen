@@ -21,21 +21,15 @@ public class MNUsuarioBL {
         List<MNUsuario> mnListaUsuarios = new ArrayList<>();
         MNUsuario mnUsuario;
         try {
-            if (mnRs.first()) {
-                while (mnRs.next()) {
-                    mnUsuario = new MNUsuario();
-                    mnUsuario.setId(mnRs.getInt(1));
-                    mnUsuario.setNombreUsuario(mnRs.getString(2));
-                    mnUsuario.setClaveUsuario(mnRs.getString(3));
-
-                    mnListaUsuarios.add(mnUsuario);
-                }
-
+            while (mnRs.next()) {
+                mnUsuario = new MNUsuario();
+                mnUsuario.setId(mnRs.getInt(1));
+                mnUsuario.setNombreUsuario(mnRs.getString(2));
+                mnUsuario.setClaveUsuario(mnRs.getString(3));   
+                mnListaUsuarios.add(mnUsuario);
+            }
                 mnRs.close();
                 return mnListaUsuarios;
-            }
-
-            return null;
         } catch (SQLException e) {
             throw new AppExceptionAriel(e, getClass(), "mnGetAll()");
         }
