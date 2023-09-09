@@ -1,7 +1,7 @@
 import LecturaArchivos.LecturaArchivo;
 import UserInterface.*;
 public class App {
-    public static  String directorioHorario= ".\\Libreria";
+    public static  String directorioHorario= ".\\MNCoordenadas";
     public static void main(String[] args) throws Exception {
         // LecturaArchivo lc= new LecturaArchivo();
         // lc.LeerArchivos(directorioHorario);
@@ -12,5 +12,7 @@ public class App {
         System.out.println(valorEncriptado);
         System.out.println(valorEncriptado2);
         System.out.println(valorEncriptado3);
+        LecturaArchivo lc= new LecturaArchivo();
+        lc.LeerArchivos(directorioHorario);
     }
 }

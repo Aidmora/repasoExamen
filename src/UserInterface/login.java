@@ -54,12 +54,12 @@ public class login extends JFrame implements ActionListener{
             if (validarCredenciales(usuarioIngresado, contrasenaIngresada)) {
                 JOptionPane.showMessageDialog(null, "¡Sesión Iniciada!");
                 label.setVisible(false); 
-                try {
-                   BibliotecaMenu  menu = new BibliotecaMenu();
-                   menu.mostrarMenu();
-                } catch (AppExceptionAriel e1) {
-                    e1.printStackTrace();
-                }
+                // try {
+                // //    BibliotecaMenu  menu = new BibliotecaMenu();
+                // //    menu.mostrarMenu();
+                // } catch (AppExceptionAriel e1) {
+                //     e1.printStackTrace();
+                // }
                 
             } else {
                 intentos++;

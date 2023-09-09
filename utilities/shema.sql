@@ -1,5 +1,5 @@
 CREATE TABLE MN_USUARIO(
-    IdUsuario           INTEGER     PRIMARY KEY NOT NULL AUTOINCREMENT,
+    IdUsuario           INTEGER     NOT NULL    PRIMARY KEY  AUTOINCREMENT,
     NombreUsuario       TEXT        NOT NULL,
     ContrasenaUsuario   TEXT        NOT NULL
 );
@@ -10,3 +10,30 @@ INSERT INTO MN_USUARIO(NombreUsuario, ContrasenaUsuario) VALUES("ariel.mora@epn.
 INSERT INTO MN_USUARIO(NombreUsuario, ContrasenaUsuario) VALUES("fernando.nagua@epn.edu.ec","7a50f881fd3ab79fd4afd48a9c0da490");
 
 SELECT * FROM MN_USUARIO;
+
+CREATE TABLE MN_ARSENALTIPO(
+    IdArenalTipo    INTEGER     NOT NULL    PRIMARY KEY  AUTOINCREMENT,
+    NombreArsenal   TEXT        NOT NULL
+);
+
+
+CREATE TABLE MN_COORDENADAS(
+    IdCoordenada    INTEGER     NOT NULL    PRIMARY KEY  AUTOINCREMENT,
+    Coordenada      TEXT        NOT NULL
+    );
+SELECT * FROM MN_COORDENADAS;
+
+
+CREATE TABLE MN_ARSENAL(
+    IdArsenal       INTEGER     NOT NULL    PRIMARY KEY  AUTOINCREMENT,
+    NombreArsenal   TEXT        NOT NULL
+);
+SELECT * FROM MN_ARSENAL;
+
+CREATE TABLE MN_HORARIO(
+    IdHorario       INTEGER     NOT NULL    PRIMARY KEY  AUTOINCREMENT,
+    NombreDia       TEXT        NOT NULL,
+    Hora            TEXT        NOT NULL                               
+);
+SELECT * FROM MN_HORARIO;
+SELECT * FROM MN_ARSENALTIPO;

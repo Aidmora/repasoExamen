@@ -4,12 +4,21 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import DataAccess.SQLiteDataHelper;
 import FrameWork.AppExceptionAriel;
 public class LecturaArchivo {
-    public List<String> lines;
+    public List<String> mnLines;
+    public List<String> mnArsenalTipo=new ArrayList<>();
+    public List<String> mnCoordenadas=new ArrayList<>();
+    public List<String> mnArsenal=new ArrayList<>();
+    public List<String> mnHorario=new ArrayList<>();
+    public List<String> mnHorarioDia=new ArrayList<>();
+    public List<String> mnArsenalNombre= new ArrayList<>();
+    public String mnNombreArsenal="";
     public void LeerArchivos(String directorioHorario) throws IOException, AppExceptionAriel, SQLException{
         File f = new File(directorioHorario);
         if(f.isDirectory()){
@@ -17,17 +26,58 @@ public class LecturaArchivo {
             for (String nomArchivo : fileNames) {
                 if(nomArchivo.endsWith(".csv")){
                     String nombreArchivo= directorioHorario+"\\"+nomArchivo;
-                    lines = Files.readAllLines(Paths.get(nombreArchivo));
-                    String nombreTabla= nomArchivo.substring(0,nomArchivo.lastIndexOf("."));
-                    SQLiteDataHelper.crearTablaDesdeCSV(lines,nombreTabla);
+                    mnLines = Files.readAllLines(Paths.get(nombreArchivo));
 
-                          
+                    for (String line : mnLines) {
+                        String[] values = line.split(";");
+                        if(values[0].toLowerCase().trim().contains("id")){
+                        continue;
+                        }
+                        mnCoordenadas.add(values[1]);
+                        mnArsenal.add(values[7]);
+
+                        for (int i = 2; i <7 ; i++) {
+                            if (!values[i].trim().isEmpty()) {
+                                mnHorario.add(values[i]);
+                                if(i==2) mnHorarioDia.add("Lunes");
+                                if(i==3) mnHorarioDia.add("Martes");
+                                if(i==4) mnHorarioDia.add("Miercoles");
+                                if(i==5) mnHorarioDia.add("Jueves");
+                                if(i==6) mnHorarioDia.add("Viernes");
+                                continue;
+
+                            }
+                            
+                        }
+                        if(values[1].contains("00")){
+                            mnHorarioDia.add("");
+                            mnHorario.add("");
+                        }
+
+
+                    }
+                }else{
+                    System.out.println(";/ Error en directorioHorario: "+ directorioHorario);
                 }
             }
-        }else{
-            System.out.println(";/ Error en directorioHorario: "+ directorioHorario);
         }
+        mnObtenerNombreArsenal(mnArsenal);
+        System.out.println("[+] Leyendo:" +"\n"
+                            + " -Arsenal Tipo....."+"\n"
+                            + " -Coordenadas....."+"\n"
+                            + " -Arsenal....."+"\n"
+                            + " -Horarios.....");
     }
-
+    public List<String> mnObtenerNombreArsenal(List <String> mnArsenal){
+        for (String mnCodigo : mnArsenal) {
+            if(mnCodigo.equals("a"))mnNombreArsenal="Avion";
+            if(mnCodigo.equals("ab"))mnNombreArsenal="Avion,Barco";
+            if(mnCodigo.equals("abcdt"))mnNombreArsenal="Avion,Barco,Convoy,Dron,Tanque";
+            if(mnCodigo.equals("abc"))mnNombreArsenal="Avion,Barco,Convoy";
+            if(mnCodigo.equals("abcd"))mnNombreArsenal="Avion,Barco,Convoy,Dron";
+            mnArsenalNombre.add(mnNombreArsenal);
+        }
+        return mnArsenalNombre;
+    }
 }
  
