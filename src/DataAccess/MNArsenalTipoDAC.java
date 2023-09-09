@@ -25,6 +25,8 @@ public class MNArsenalTipoDAC extends SQLiteDataHelper {
 
     @Override
     public ResultSet mnGetAll() throws AppExceptionAriel {
-        return null;
+        mnConsultaSQL= "SELECT NombreArsenalTipo  FROM MN_ARSENALTIPO";
+        
+        return mnGetResulSet(mnConsultaSQL); 
     }
 }

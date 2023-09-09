@@ -28,6 +28,8 @@ public class MNCoordenadasDAC extends SQLiteDataHelper {
 
     @Override
     public ResultSet mnGetAll() throws AppExceptionAriel {
-        return null;
+        mnConsultaSQL= "SELECT Coordenada  FROM MN_COORDENADAS";
+        
+        return mnGetResulSet(mnConsultaSQL);    
     }
 }
